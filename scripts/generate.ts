@@ -427,8 +427,7 @@
 //   }
 // };
 
-// run();
-import 'dotenv/config';
+// run();import 'dotenv/config';
 import axios from 'axios';
 import { GoogleGenAI } from '@google/genai';
 import fs from 'fs';
@@ -607,8 +606,10 @@ const getFolderStats = (dir: string) => {
 
 // ================= SEND BATCH EMAIL =================
 const sendBatchEmail = async (success: any[], failed: any[]) => {
+  // Bangladesh time
   const now = new Date();
-  const dateTimeStr = now.toLocaleString();
+  const dateTimeStr = now.toLocaleString('en-US', { timeZone: 'Asia/Dhaka' });
+
   const folderStats = getFolderStats(GENERATED_DIR);
 
   const subject = `Content Generation Report - ${dateTimeStr} - ${success.length} Success, ${failed.length} Failed`;
@@ -616,7 +617,7 @@ const sendBatchEmail = async (success: any[], failed: any[]) => {
   const body = `
 Multi-Key Content Generation Report
 ----------------------------------
-Date & Time: ${dateTimeStr}
+Date & Time (BDT): ${dateTimeStr}
 Total Processed: ${success.length + failed.length}
 Success: ${success.length}
 Failed: ${failed.length}

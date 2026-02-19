@@ -2,7 +2,7 @@ name: Content Generation Pipeline
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Runs every 30 minutes
+    - cron: '0 * * * *' # Runs at minute 0 of every hour
   workflow_dispatch: # Allows manual trigger
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write # Required to push changes
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -26,13 +26,14 @@ jobs:
 
       - name: Run Content Generation Script
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
-          EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          GEMINI_API_KEY1: ${{ secrets.GEMINI_API_KEY1 }}
+          GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
+          EMAIL_HOST: smtp.gmail.com
+          EMAIL_PORT: 587
+          EMAIL_USER: limon.working@gmail.com
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
-          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: limon.working@gmail.com
+          EMAIL_TO: beacleaner@gmail.com
         run: npx tsx scripts/generate.ts
 
       - name: Commit and Push Generated Content

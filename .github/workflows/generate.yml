@@ -33,7 +33,7 @@ jobs:
           EMAIL_USER: limon.working@gmail.com
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
           EMAIL_FROM: limon.working@gmail.com
-          EMAIL_TO: beacleaner@gmail.com
+          EMAIL_TO: limonshah3@gmail.com
         run: npx tsx scripts/generate.ts
 
       - name: Commit and Push Generated Content

@@ -7,7 +7,7 @@ import nodemailer from 'nodemailer';
 
 // ================= CONFIG =================
 const EXTERNAL_API_BASE = 'https://cloud-text-manager-server.vercel.app';
-const EXTERNAL_API_URL = `${EXTERNAL_API_BASE}/api/file`;
+const EXTERNAL_API_URL = `${EXTERNAL_API_BASE}/api/all-files`;
 const GENERATED_DIR = path.join(process.cwd(), 'generated-content');
 
 const BATCH_SIZE = 15;
@@ -131,7 +131,7 @@ const processFile = async (file: any, model: string) => {
 
     fs.writeFileSync(filePath, generatedContent, 'utf-8');
 
-    await axios.put(`${EXTERNAL_API_URL}/${file.id}`, {
+    await axios.put(`${EXTERNAL_API_URL}/${file._id}`, {
       status: 'AlreadyCopy',
       completedTimestamp: Date.now(),
     });

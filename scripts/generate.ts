@@ -7,7 +7,7 @@ import nodemailer from 'nodemailer';
 
 // ================= CONFIG =================
 const EXTERNAL_API_BASE = 'https://cloud-text-manager-server.vercel.app';
-const EXTERNAL_API_URL = `${EXTERNAL_API_BASE}/api/files`;
+const EXTERNAL_API_URL = `${EXTERNAL_API_BASE}/api/file`;
 const GENERATED_DIR = path.join(process.cwd(), 'generated-content');
 
 const BATCH_SIZE = 15;

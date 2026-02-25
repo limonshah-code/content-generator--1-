@@ -86,7 +86,7 @@ const generateWithRetry = async (promptText: string, model: string) => {
 
   while (attempt < MAX_RETRIES) {
     try {
-      const ai = getNextGemini();
+      const ai = getNext();
       await sleep(REQUEST_DELAY);
 
       const result = await ai.models.generateContent({
@@ -147,7 +147,7 @@ const processFile = async (file: any, model: string) => {
 
 // ================= PARALLEL QUEUE =================
 const runQueue = async (files: any[]) => {
-  const model = process.env.GEMINI_MODEL || 'gemini-3-flash-preview';
+  const model = process.env.GEMINI_MODEL || 'gemini-2.5-pro';
   const results: any[] = [];
   let index = 0;
 

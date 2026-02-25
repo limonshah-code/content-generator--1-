@@ -12,8 +12,8 @@ const GENERATED_DIR = path.join(process.cwd(), 'generated-content');
 
 const BATCH_SIZE = 15;
 const CONCURRENCY_LIMIT = 1;
-const REQUEST_DELAY = 1500;
-const MAX_RETRIES = 5;
+const REQUEST_DELAY = 1200;
+const MAX_RETRIES = 3;
 
 // Ensure output directory exists
 if (!fs.existsSync(GENERATED_DIR)) {
@@ -86,7 +86,7 @@ const generateWithRetry = async (promptText: string, model: string) => {
 
   while (attempt < MAX_RETRIES) {
     try {
-      const ai = getNext();
+      const ai = getNextGemini();
       await sleep(REQUEST_DELAY);
 
       const result = await ai.models.generateContent({
@@ -183,10 +183,10 @@ const sendBatchEmail = async (success: any[], failed: any[]) => {
 
   const folderStats = getFolderStats(GENERATED_DIR);
 
-  const subject = `Content Generation Report API- 1 - ${dateTimeStr} - ${success.length} Success, ${failed.length} Failed`;
+  const subject = `Content Generation Report Api- 5 - ${dateTimeStr} - ${success.length} Success, ${failed.length} Failed`;
 
   const body = `
-Multi-Key Content Generation Report
+Multi-Key Api Number 5 Content Generation Report
 ----------------------------------
 Date & Time (BDT): ${dateTimeStr}
 Total Processed: ${success.length + failed.length}
@@ -241,5 +241,6 @@ const run = async () => {
     process.exit(1);
   }
 };
+
 
 run();
